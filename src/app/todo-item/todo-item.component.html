@@ -1,0 +1,5 @@
+
+<div>
+      <label for="todoItem" [ngClass]="{'crossed': todo.isDone}">{{todo.title | uppercase}}</label>
+      <input type="checkbox" id="todoItem" [checked]="todo.isDone" (change)="todo.isDone = !todo.isDone">
+</div>

@@ -1,0 +1,14 @@
+<app-todo-form (eventToSend)="eventReceived($event)"></app-todo-form>
+
+<div [ngSwitch]="todos.length">
+  <h3 *ngSwitchCase="0">Liste des choses à faire : aucune tâche, BRAVO !</h3>
+  <h3 *ngSwitchCase="1">Liste des choses à faire : une seule tâche encore à faire ! </h3>
+  <h3 *ngSwitchDefault> Liste des choses à faire : {{todos.length}} tâches à faire ... COURAGE !</h3>
+</div>
+
+
+<ul>
+  <li *ngFor="let todo of todos; first as isFirst">
+    <app-todo-item [todo]="todo"></app-todo-item>
+  </li>
+</ul>
