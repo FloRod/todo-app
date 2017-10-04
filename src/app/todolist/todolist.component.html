@@ -1,4 +1,4 @@
-<app-todo-form (eventToSend)="eventReceived($event)"></app-todo-form>
+<app-todo-form (todoEventSent)="todoEventReceived($event)" (resetActionEventSent)="resetActionEventReceived()"></app-todo-form>
 
 <div [ngSwitch]="todos.length">
   <h3 *ngSwitchCase="0">Liste des choses à faire : aucune tâche, BRAVO !</h3>

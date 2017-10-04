@@ -1,31 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import ToDo from '../../models/ToDo'
+import ToDoService from '../TodoServices/ToDoService'
 
 @Component({
   selector: 'app-todolist',
   templateUrl: './todolist.component.html',
-  styleUrls: ['./todolist.component.css']
+  styleUrls: ['./todolist.component.css'],
+  providers: [
+    ToDoService
+  ]
 })
 export class TodolistComponent implements OnInit {
 
   todos: Array<ToDo> = [];
 
-  eventReceived(event){
-    if (typeof event == 'boolean'){
-      if(event)
-      this.todos = [];
-    }
-    else {
-      this.todos.unshift(event)
-    }
-  }
-
-  // resetActionReceived(statut){
-  //   if(statut)
-  //   this.todos = [];
+  // eventReceived(event){
+  //   if (typeof event == 'boolean'){
+  //     if(event)
+  //     this.todos = [];
+  //   }
+  //   else {
+  //     this.todos.unshift(event)
+  //   }
   // }
 
-  constructor() { }
+  todoEventReceived(todoEvent) {
+   // this.todos.unshift(todoEvent);
+    this.todos = this.todoService.addToDoList(todoEvent);
+  }
+
+  resetActionEventReceived() {
+    this.todos = [];
+    this.todos = this.todoService.resetToDoList();
+  }
+
+  constructor(private todoService: ToDoService) { }
 
   ngOnInit() {
     // this.todos =[

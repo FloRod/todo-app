@@ -10,18 +10,18 @@ export class TodoFormComponent implements OnInit {
 
 
   @Output()
-  eventToSend:EventEmitter<ToDo|boolean> = new EventEmitter<ToDo|boolean>();
+  todoEventSent:EventEmitter<ToDo> = new EventEmitter<ToDo>();
 
   handleClick(todoTitle: string){
     //alert(todoTitle);
-    this.eventToSend.emit(new ToDo(todoTitle, false));
+    this.todoEventSent.emit(new ToDo(todoTitle, false));
   };
 
-  // @Output()
-  // resetActionToSend:EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output()
+  resetActionEventSent: EventEmitter<any> = new EventEmitter();
 
   resetClick(){
-    this.eventToSend.emit(true);
+    this.resetActionEventSent.emit();
   }
 
   constructor() { }
