@@ -1,20 +1,27 @@
 import ToDo from '../../models/ToDo';
+import ToDoApi from './ToDoApi'; //ajout2
+import {Injectable} from '@angular/core' //ajout2
 
+@Injectable()
 export default class ToDoService {
-    todos: Array<ToDo> =[];
+    todos: Array<ToDo> = [];
 
-    constructor() {};
+    constructor(private todoApi: ToDoApi) { }; //ajout2
 
-    getToDo(): Array<ToDo>{
-        return this.todos;
+    getToDo(): Promise<Array<ToDo>> {
+       // return this.todos;
+       return this.todoApi.fetchToDo(this.todos, 'get');
     };
 
-    resetToDoList():  Array<ToDo>{
-       return this.todos=[];
+    resetToDoList(): Promise<Array<ToDo>> {
+        this.todos = [];
+       // return this.todos;
+       return this.todoApi.fetchToDo(this.todos, 'reset');
     };
 
-    addToDoList(todoEvent: ToDo):  Array<ToDo> {
-        this.todos.unshift(todoEvent);
-        return this.todos;
+    addToDoList(todoEvent: ToDo): Promise<Array<ToDo>> {
+        //this.todos.unshift(todoEvent);
+       // return this.todos;
+       return this.todoApi.fetchAddToDo(this.todos, todoEvent, 'add');
     };
 }

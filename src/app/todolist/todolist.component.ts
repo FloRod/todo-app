@@ -26,12 +26,12 @@ export class TodolistComponent implements OnInit {
 
   todoEventReceived(todoEvent) {
    // this.todos.unshift(todoEvent);
-    this.todos = this.todoService.addToDoList(todoEvent);
+    this.todoService.addToDoList(todoEvent).then((todos) => {this.todos = todos});
   }
 
   resetActionEventReceived() {
-    this.todos = [];
-    this.todos = this.todoService.resetToDoList();
+  //  this.todos = [];
+    this.todoService.resetToDoList().then((todos) => {this.todos = todos});
   }
 
   constructor(private todoService: ToDoService) { }
