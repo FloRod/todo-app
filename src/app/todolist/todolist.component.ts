@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import ToDo from '../../models/ToDo'
-import ToDoService from '../TodoServices/ToDoService'
+import {ToDoService} from '../TodoServices/ToDoService'
 
 @Component({
   selector: 'app-todolist',
@@ -12,7 +12,7 @@ import ToDoService from '../TodoServices/ToDoService'
 })
 export class TodolistComponent implements OnInit {
 
-  todos: Array<ToDo> = [];
+  todos: Array<ToDo>; 
 
   // eventReceived(event){
   //   if (typeof event == 'boolean'){
@@ -31,12 +31,13 @@ export class TodolistComponent implements OnInit {
 
   resetActionEventReceived() {
   //  this.todos = [];
-    this.todoService.resetToDoList().then((todos) => {this.todos = todos});
+    this.todoService.resetToDoList().then((todos) => {this.todos = todos});;
   }
 
   constructor(private todoService: ToDoService) { }
 
   ngOnInit() {
+    this.todoService.getToDo().then((todos) => {this.todos = todos});
     // this.todos =[
     //   new ToDo('sent a mail', false),
     //   new ToDo('cook a meal', false),
